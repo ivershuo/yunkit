@@ -3,6 +3,9 @@ class Modules_Response{
 	protected $def_cb  = 'cb';
 	protected $headers = array();
 
+	public function __construct(){
+	}
+
 	public static $messages = array(
 		// Informational 1xx
 		100 => 'Continue',
@@ -52,9 +55,6 @@ class Modules_Response{
 		505 => 'HTTP Version Not Supported',
 		509 => 'Bandwidth Limit Exceeded'
 	);
-
-	public function __construct(){
-	}
 
 	public function add_header($k, $v){
 		$this->headers[$k] = $v;

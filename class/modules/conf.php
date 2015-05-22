@@ -1,4 +1,5 @@
 <?php
+/*配置加载*/
 $config = include(APP_PATH . '/config/config.php');
 
 Class Modules_Conf{

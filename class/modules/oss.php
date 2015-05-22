@@ -19,7 +19,7 @@ class Modules_Oss {
 		}
 		if($default_path){
 			$this->set_default_path($default_path);
-		}		
+		}
 		$this->oss_client = $oss_client;
 	}
 
@@ -62,13 +62,13 @@ class Modules_Oss {
 			'__js' => 'application/x-javascript',
 			'json' => 'application/json',
 			'doc'  => 'application/msword',
-			'dvi'  => 'application/x-dvi',			
-			'gz'   => 'application/x-gzip',			
+			'dvi'  => 'application/x-dvi',
+			'gz'   => 'application/x-gzip',
 			'pdf'  => 'application/pdf',
-			'ppt'  => 'application/vnd.ms-powerpoint',			
+			'ppt'  => 'application/vnd.ms-powerpoint',
 			'swf'  => 'application/x-shockwave-flash',
 			'tar'  => 'application/x-tar',
-			'tgz'  => 'application/x-compressed',			
+			'tgz'  => 'application/x-compressed',
 			'xls'  => 'application/vnd.ms-excel',
 			'zip'  => 'application/zip',
 			'exe'  => 'application/x-dosexec',
@@ -114,19 +114,19 @@ class Modules_Oss {
 			$pre = substr(md5($content), 0, 16);
 			$ext = self::get_ext_by_mime($content_type);
 			$this->name = $pre . ($ext ? '.' . $ext : '');
-		}		
-		$key = ($this->path ? $this->path . '/' : '') . $this->name;		
+		}
+		$key = ($this->path ? $this->path . '/' : '') . $this->name;
 
 		$default_opt = array(
-            'Bucket'        => $this->bucket,
-            'Key'           => $key,
-            'Content'       => $content,
-            'ContentLength' => strlen($content),
-            'ContentType'   => $content_type,
-            'Expires'       => new \DateTime("+5 years"),
-            'CacheControl'  => 'public, max-age=31536000',
-            'UserMetadata'  => $this->metadata,
-        );
+			'Bucket'        => $this->bucket,
+			'Key'           => $key,
+			'Content'       => $content,
+			'ContentLength' => strlen($content),
+			'ContentType'   => $content_type,
+			'Expires'       => new \DateTime("+5 years"),
+			'CacheControl'  => 'public, max-age=31536000',
+			'UserMetadata'  => $this->metadata,
+		);
 		$opt = array_merge($default_opt, $this->http_header);
 
 		if(is_string($content) && strpos($opt['ContentType'], 'charset=') === false){
@@ -143,10 +143,10 @@ class Modules_Oss {
 
 		try{
 			$this->oss_client->putObject($opt);
-            return $key;
+			return $key;
 		} catch(\Aliyun\OSS\Exceptions\OSSException $e){
 			//$e->getMessage();
-        }
+		}
 	}
 	
 	public function upload($content){
@@ -157,6 +157,6 @@ class Modules_Oss {
 		$content = file_get_contents($file);
 		if($content){
 			return $this->upload($content);
-		}		
+		}
 	}
 }

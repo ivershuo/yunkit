@@ -58,9 +58,9 @@ class Modules_Smarty {
 		$this->smarty->display($file);
 	}
 
-	public function fetch($file, $data=array()){
+	public function fetch($file, $data=array(), $cacheSets=array()){
 		foreach ($data as $key => $value) {
-			$this->assign($key, $value);
+			$this->assign($key, $value, $cacheSets[$key]);
 		}
 		return $this->smarty->fetch($file);
 	}

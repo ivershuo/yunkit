@@ -48,8 +48,8 @@ class Controller{
 		return isset($get_data[$key]) ? $get_data[$key] : '';
 	}
 
-	protected function assign($key, $value=true){
-		$this->view->assign($key, $value);
+	protected function assign($key, $value=true, $nocache=false){
+		$this->view->assign($key, $value, $nocache);
 	}
 
 	protected function add_ctx_data($key, $data=true){
@@ -120,7 +120,7 @@ class Controller{
 		}
 		$data = $this->view->getData();
 		if($this->smarty){
-			$resp_data = $this->smarty->fetch($this->tpl_file, $data);
+			$resp_data = $this->smarty->fetch($this->tpl_file, $data, $this->view->getVarCacheSets());
 			$this->response->send($resp_data);
 		}
 		ob_start();
